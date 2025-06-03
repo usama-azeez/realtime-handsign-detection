@@ -3,14 +3,14 @@
 This project implements a real-time American Sign Language (ASL) hand sign recognition system using MediaPipe for hand landmark detection and a machine learning model (Random Forest) for classification. It includes both a desktop Python app and a web-based interface to predict hand signs from live video input and provides audio feedback.
 
 ---
+## 📽️ Sample Demo Video
 
-Sample Video
-Watch a demo of realtime hand sign detection:
-
+<iframe width="560" height="315" src="[https://www.youtube.com/embed/YOUR_VIDEO_ID](https://youtu.be/E8wQjdtTmMw)" frameborder="0" allowfullscreen></iframe>
 
 
 
 ## Project Overview
+
 - `collecting.py`: Capture hand sign images from webcam for dataset  
 - `create_dataset.py`: Extract hand landmarks and prepare data for training  
 - `training.py`: Train and save RandomForest model on processed dataset  
@@ -20,18 +20,6 @@ Watch a demo of realtime hand sign detection:
 - `model.p`: Trained model pickle file (should be placed here)  
 
 ---
-
-## Folder Structure
-
-├── data/ # Raw collected image data, class-wise folders (0 to 25) [Not included due to size]
-├── collecting.py # Script to capture images for each sign class
-├── create_dataset.py # Process images to extract landmarks and save features
-├── training.py # Train the Random Forest model on the dataset
-├── testing.py # Real-time sign prediction with webcam, audio, and image display
-├── model.p # Saved trained model file (generated after training)
-├── index.html # Web frontend for webcam capture and prediction display
-├── README.md # Project documentation
-
 
 > **Note:**  
 > The app source code and dataset folders are **not included** in this repository due to their large size (over 1 GB).  
@@ -71,7 +59,7 @@ Easy-to-use interface for capturing new data and testing model predictions.
 ## 🏁 How to Run
 
 1. **Clone the Repository**
-   git clone https://github.com/your-username/realtime-handsign-detection.git
+   git clone https://github.com/usama-azeez/realtime-handsign-detection.git
    cd realtime-handsign-detection
 
 2. **Install Dependencies**
@@ -113,6 +101,7 @@ Large files such as the app source code and dataset are omitted for repository s
 ## Credits 
 Developed by **Usama Aziz**
 University: University of Narowal
-Date: Sep 2025
+Date: Sep 2024
+Email: usamaaziz304@gmail.com
 
 Feel free to reach out if you have questions or want to contribute!
