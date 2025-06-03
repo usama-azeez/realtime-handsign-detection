@@ -72,7 +72,7 @@ Easy-to-use interface for capturing new data and testing model predictions.
 Run collecting.py to collect 100 images for each of the 26 classes:
    python collecting.py
 
-2. **2. Dataset Preparation**
+2. **Dataset Preparation**
 Run create_dataset.py to process images, extract landmarks, and save features:
    python create_dataset.py
 This creates data.pickle containing features and labels.
@@ -100,9 +100,9 @@ The project assumes labels from 0 to 25 map to A-Z respectively.
 Large files such as the app source code and dataset are omitted for repository size reasons.
 
 ## Credits 
-Developed by **Usama Aziz**
-University: University of Narowal
-Date: Sep 2024
+Developed by **Usama Aziz** <br>
+University: University of Narowal <br>
+Date: Sep 2024 <br>
 Email: usamaaziz304@gmail.com
 
 Feel free to reach out if you have questions or want to contribute!
