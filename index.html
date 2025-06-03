@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Sign Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .video-container {
+            position: relative;
+            width: 800px; /* Adjust as per your video dimensions */
+            height: 600px; /* Adjust as per your video dimensions */
+            margin-bottom: 20px;
+        }
+
+        video {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            height: 100%;
+        }
+
+        #prediction {
+            font-size: 20px;
+            color: #333;
+            background-color: #fff;
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        #alphabet-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            max-width: 200px; /* Adjust as per your image dimensions */
+            max-height: 250px; /* Adjust as per your image dimensions */
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hide the image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Hand Sign Prediction</h1>
+    <div id="controls">
+        <button id="start-camera" class="button">Open Camera</button>
+        <button id="quit-camera" class="button" style="display:none;">Quit</button>
+    </div>
+    <div class="video-container">
+        <video id="video" autoplay></video>
+        <img id="alphabet-image" src="" alt="Alphabet Image">
+    </div>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <p id="prediction">Prediction: </p>
+
+    <script>
+        const startCameraButton = document.getElementById('start-camera');
+        const quitCameraButton = document.getElementById('quit-camera');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const predictionText = document.getElementById('prediction');
+        const alphabetImage = document.getElementById('alphabet-image');
+
+        let stream;
+        let captureInterval;
+
+        startCameraButton.addEventListener('click', async () => {
+            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+            video.srcObject = stream;
+            startCameraButton.style.display = 'none';
+            quitCameraButton.style.display = 'inline-block';
+
+            // Start capturing frames every second
+            captureInterval = setInterval(captureFrame, 1000);
+        });
+
+        quitCameraButton.addEventListener('click', () => {
+            clearInterval(captureInterval);
+            stream.getTracks().forEach(track => track.stop());
+            video.srcObject = null;
+            startCameraButton.style.display = 'inline-block';
+            quitCameraButton.style.display = 'none';
+            predictionText.innerText = 'Prediction: ';
+            alphabetImage.style.display = 'none';
+        });
+
+        async function captureFrame() {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('file', blob, 'capture.jpg');
+
+                fetch('http://192.168.100.37:5001/predict', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.predictions && data.predictions.length > 0) {
+                        predictionText.innerText = 'Prediction: ' + data.predictions[0];
+                        if (data.image_path) {
+                            alphabetImage.src = data.image_path;
+                            alphabetImage.style.display = 'inline-block';
+                        } else {
+                            alphabetImage.style.display = 'none';
+                        }
+                    } else {
+                        predictionText.innerText = 'No prediction available';
+                        alphabetImage.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    predictionText.innerText = 'Error making prediction';
+                    alphabetImage.style.display = 'none';
+                });
+            }, 'image/jpeg');
+        }
+    </script>
+</body>
+</html>
