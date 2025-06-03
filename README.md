@@ -6,7 +6,7 @@ This project implements a real-time American Sign Language (ASL) hand sign recog
 
 ## 📽️ Sample Demo Video
 
-👉 [Click here to watch the demo on YouTube Part 1](https://youtu.be/c_3fOgwVXh4)
+👉 [Click here to watch the demo on YouTube Part 1](https://youtu.be/c_3fOgwVXh4)  <br>
 👉 [Click here to watch the demo on YouTube Part 2](https://youtu.be/E8wQjdtTmMw)
 
 
