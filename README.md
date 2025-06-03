@@ -13,9 +13,13 @@ Watch a demo of realtime hand sign detection:
 ## Project Overview
 
 - **Data Collection:** Capture images of hand signs using webcam and save them into class-specific folders.
+  
 - **Dataset Creation:** Extract hand landmarks from images using MediaPipe and prepare feature vectors for training.
+  
 - **Model Training:** Train a Random Forest classifier on the processed dataset.
+  
 - **Real-Time Testing:** Predict hand signs live from webcam input with visual and audio feedback.
+  
 - **Web Interface:** A frontend web app captures webcam frames, sends to a backend for prediction, and displays results with images.
 
 ---
