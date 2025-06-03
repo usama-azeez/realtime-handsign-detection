@@ -3,10 +3,10 @@
 This project implements a real-time American Sign Language (ASL) hand sign recognition system using MediaPipe for hand landmark detection and a machine learning model (Random Forest) for classification. It includes both a desktop Python app and a web-based interface to predict hand signs from live video input and provides audio feedback.
 
 ---
+
 ## 📽️ Sample Demo Video
 
-<iframe width="560" height="315" src="[https://www.youtube.com/embed/YOUR_VIDEO_ID](https://youtu.be/E8wQjdtTmMw)" frameborder="0" allowfullscreen></iframe>
-
+👉 [Click here to watch the demo on YouTube](https://youtu.be/E8wQjdtTmMw)
 
 
 ## Project Overview
