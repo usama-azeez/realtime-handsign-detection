@@ -11,16 +11,13 @@ Watch a demo of realtime hand sign detection:
 
 
 ## Project Overview
-
-- **Data Collection:** Capture images of hand signs using webcam and save them into class-specific folders.
-  
-- **Dataset Creation:** Extract hand landmarks from images using MediaPipe and prepare feature vectors for training.
-  
-- **Model Training:** Train a Random Forest classifier on the processed dataset.
-  
-- **Real-Time Testing:** Predict hand signs live from webcam input with visual and audio feedback.
-  
-- **Web Interface:** A frontend web app captures webcam frames, sends to a backend for prediction, and displays results with images.
+- `collecting.py`: Capture hand sign images from webcam for dataset  
+- `create_dataset.py`: Extract hand landmarks and prepare data for training  
+- `training.py`: Train and save RandomForest model on processed dataset  
+- `testing.py`: Realtime prediction using webcam, shows predicted letter with image & speech  
+- `index.html`: Web interface for webcam capture and prediction display  
+- `data/`: Folder containing collected images (not included due to size)  
+- `model.p`: Trained model pickle file (should be placed here)  
 
 ---
 
